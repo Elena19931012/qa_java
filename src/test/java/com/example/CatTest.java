@@ -23,12 +23,18 @@ public class CatTest {
     }
 
     @Test
-    public void testGetFood() throws Exception {
+    public void testGetFoodReturnsCorrectFood() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(feline.eatMeat()).thenReturn(expectedFood);
 
         Cat cat = new Cat(feline);
         assertEquals(expectedFood, cat.getFood());
+    }
+
+    @Test
+    public void testGetFoodCallsFelineEatMeat() throws Exception {
+        Cat cat = new Cat(feline);
+        cat.getFood();
         Mockito.verify(feline).eatMeat();
     }
 }

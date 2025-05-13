@@ -42,11 +42,17 @@ public class AlexLionTest {
     }
 
     @Test
-    public void testGetFoodDelegatesToPredator() throws Exception {
+    public void testGetFoodReturnsCorrectFood() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(feline.eatMeat()).thenReturn(expectedFood);
         AlexLion alex = new AlexLion(feline);
         assertEquals(expectedFood, alex.getFood());
+    }
+
+    @Test
+    public void testGetFoodCallsFelineEatMeat() throws Exception {
+        AlexLion alex = new AlexLion(feline);
+        alex.getFood();
         Mockito.verify(feline).eatMeat();
     }
 }
